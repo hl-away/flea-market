@@ -1,19 +1,25 @@
 package com.fleamarket.objects;
 
-import android.R;
+import com.fleamarket.db.CategoryDAO;
 
 import java.util.*;
 
 /**
  * User: hl-away
  * Date: 10.10.13
- * Time: 23:06
  */
 public class Category {
-    private int id = 0;
+    private long id = 0;
     private String name;
-    private int itemsCount = 0;
-    private int parentCategoryId;
+    private long itemsCount = 0;
+    private long parentCategoryId;
+
+    public Category(long id, String name, int itemsCount, long parentCategoryId) {
+        this.id = id;
+        this.name = name;
+        this.itemsCount = itemsCount;
+        this.parentCategoryId = parentCategoryId;
+    }
 
     public Category(String name, int itemsCount) {
         this.name = name;
@@ -21,11 +27,11 @@ public class Category {
         this.parentCategoryId = 0;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -37,15 +43,15 @@ public class Category {
         this.name = name;
     }
 
-    public int getParentCategoryId() {
+    public long getParentCategoryId() {
         return parentCategoryId;
     }
 
-    public void setParentCategoryId(int parentCategoryId) {
+    public void setParentCategoryId(long parentCategoryId) {
         this.parentCategoryId = parentCategoryId;
     }
 
-    public int getItemsCount() {
+    public long getItemsCount() {
         return itemsCount;
     }
 
@@ -54,13 +60,13 @@ public class Category {
     }
 
     public static String[] getParametersList() {
-        return new String[]{ "itemsCount", "name" };
+        return new String[]{ CategoryDAO.COLUMN_ITEMS_COUNT, CategoryDAO.COLUMN_NAME };
     }
 
     public Map<String, Object> getViewMap() {
         Map<String, Object> parametersMap = new HashMap<String, Object>();
-        parametersMap.put("name", name);
-        parametersMap.put("itemsCount", itemsCount);
+        parametersMap.put(CategoryDAO.COLUMN_NAME, name);
+        parametersMap.put(CategoryDAO.COLUMN_ITEMS_COUNT, itemsCount);
         return parametersMap;
     }
 }

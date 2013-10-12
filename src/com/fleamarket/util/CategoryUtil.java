@@ -1,5 +1,7 @@
 package com.fleamarket.util;
 
+import android.content.Context;
+import com.fleamarket.db.CategoryDAO;
 import com.fleamarket.objects.Category;
 
 import java.util.LinkedList;
@@ -8,9 +10,20 @@ import java.util.List;
 /**
  * User: hl-away
  * Date: 10.10.13
- * Time: 23:10
  */
 public class CategoryUtil {
+    public static void createDefaultCategories(Context context) {
+        CategoryDAO dao = new CategoryDAO(context);
+        for(Category category: getMainCategories()) {
+            dao.createCategory(category);
+        }
+    }
+
+    public static List<Category> getAllCategories(Context context) {
+        CategoryDAO dao = new CategoryDAO(context);
+        return dao.getAllCategories();
+    }
+
     public static List<Category> getMainCategories() {
         List<Category> categories = new LinkedList<Category>();
         categories.add(new Category("Одежда. Обудь. Аксессуары", 23));

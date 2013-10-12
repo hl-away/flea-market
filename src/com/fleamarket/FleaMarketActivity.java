@@ -15,14 +15,14 @@ import java.util.List;
 import java.util.Map;
 
 public class FleaMarketActivity extends Activity {
-    /**
-     * Called when the activity is first created.
-     */
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        List<Category> mainCategories = CategoryUtil.getMainCategories();
+
+        CategoryUtil.createDefaultCategories(this);
+        List<Category> mainCategories = CategoryUtil.getAllCategories(this);
         ArrayList<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
         for (Category category : mainCategories) {
             data.add(category.getViewMap());
